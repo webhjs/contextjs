@@ -1,6 +1,6 @@
 <template>
     <transition name="fade" mode="out-in">
-        <div id="menu_wrapper" @contextmenu.prevent="" ref='userContain' v-show="visble">
+        <div id="menu_wrapper" @contextmenu.prevent.stop="" ref='userContain' v-show="visble">
             <slot></slot>
         </div>
     </transition>
