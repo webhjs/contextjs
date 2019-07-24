@@ -110,6 +110,12 @@
                     this.$emit('update:visble', false) 
                 })
             })
+            document.addEventListener('contextmenu',(e)=>{
+                this.$nextTick(()=>{
+                    if(!!this.$refs.userContain.contains(e.target)) return
+                    this.$emit('update:visble', false) 
+                })
+            })
             let timer = null;
             window.onresize = () => { 
                 if(timer){
