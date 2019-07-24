@@ -29,7 +29,6 @@ methods:{
   showMenu(ev){
     this.pagePosition = {pageX : ev.pageX , pageY : ev.pageY};
     this.visble = true
-    console.log(ev)
   }
 }
 ```
