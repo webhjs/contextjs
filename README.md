@@ -16,7 +16,7 @@ this is contextmenu components
 #### script代码:
 >```import Menu from '@/components/menu'``` 
 ><br>```components:{Menu}```</br>
-#### 控制函数(自定义区域侦听右击事件 @contextmenu.prevent="showMenu($event)" ):
+#### 控制函数(自定义区域侦听右击事件 @contextmenu.prevent.stop="showMenu($event)" ):
 ```
 data(){
   return {
