@@ -101,34 +101,32 @@
                     ratio = Math.round(ratio * 100);
                 }
                 return ratio;
+            },
+            docClick(e){
+                this.$nextTick(()=>{
+                    if(!!this.$refs.userContain.contains(e.target)) return
+                    this.$emit('update:visble', false) 
+                })
+            },
+            windowResizeScroll(){
+                let timer = null;
+                if(timer){
+                    clearInterval(timer);
+                }
+                timer = setTimeout(this.comPagePos(),300);
             }
         },
         mounted(){
-            document.addEventListener('click',(e)=>{
-                this.$nextTick(()=>{
-                    if(!!this.$refs.userContain.contains(e.target)) return
-                    this.$emit('update:visble', false) 
-                })
-            })
-            document.addEventListener('contextmenu',(e)=>{
-                this.$nextTick(()=>{
-                    if(!!this.$refs.userContain.contains(e.target)) return
-                    this.$emit('update:visble', false) 
-                })
-            })
-            let timer = null;
-            window.onresize = () => { 
-                if(timer){
-                    clearInterval(timer);
-                }
-                timer = setTimeout(this.comPagePos(),300);
-            };
-            window.onscroll = () => { 
-                if(timer){
-                    clearInterval(timer);
-                }
-                timer = setTimeout(this.comPagePos(),300);
-            }
+            document.addEventListener('click',this.docClick,true)
+            document.addEventListener('contextmenu',this.docClick,true)
+            window.addEventListener("resize",this.windowResizeScroll,true)
+            window.addEventListener("scroll",this.windowResizeScroll,true)
+        },
+        beforeDestroy(){
+            document.removeEventListener("click", this.docClick,true)
+            document.removeEventListener('contextmenu',this.docClick,true)
+            window.removeEventListener("resize",this.windowResizeScroll,true)
+            window.removeEventListener("scroll",this.windowResizeScroll,true)
         }
     }
 </script>
