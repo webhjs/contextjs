@@ -10,7 +10,7 @@ this is contextmenu components
 </menuCom>
 ```
 
->>子组件依赖三个值分别是:pagePosition:传入鼠标点击位置、visble:控制组件隐藏显示。
+>>子组件依赖两个值分别是:pagePosition:传入鼠标点击位置、visble:控制组件隐藏显示。
 ---
 
 #### script代码:
