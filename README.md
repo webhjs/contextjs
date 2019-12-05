@@ -17,8 +17,7 @@ this is contextmenu components
 >```import Menu from '@/components/menu'``` 
 ><br>```components:{Menu}```</br>
 #### 控制函数(自定义区域侦听右击事件 @contextmenu.prevent.stop="showMenu($event)" ):
-```
-      
+```      
 data(){
   return {
     pagePosition:{},
@@ -34,6 +33,7 @@ methods:{
 }
 ```
 #### 原生js阻止方法:
+``` 
 if(e.preventDefault || e.stopPropagation){
   e.preventDefault();
   e.stopPropagation();
@@ -41,3 +41,4 @@ if(e.preventDefault || e.stopPropagation){
   window.event.returnValue == false;
   window.event.cancelBubble = true; 
 }
+```
