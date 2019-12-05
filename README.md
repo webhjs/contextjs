@@ -18,14 +18,6 @@ this is contextmenu components
 ><br>```components:{Menu}```</br>
 #### 控制函数(自定义区域侦听右击事件 @contextmenu.prevent.stop="showMenu($event)" ):
 ```
-#### 原生js阻止方法:
-if(e.preventDefault){
-  e.preventDefault();
-  e.stopPropagation();
-}else{
-  window.event.returnValue == false;
-  window.event.cancelBubble = true; 
-}
       
 data(){
   return {
@@ -41,4 +33,11 @@ methods:{
   }
 }
 ```
-
+#### 原生js阻止方法:
+if(e.preventDefault || e.stopPropagation){
+  e.preventDefault();
+  e.stopPropagation();
+}else{
+  window.event.returnValue == false;
+  window.event.cancelBubble = true; 
+}
