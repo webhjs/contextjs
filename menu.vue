@@ -1,6 +1,6 @@
 <template>
     <transition name="fade" mode="out-in">
-        <div id="menu_wrapper" @contextmenu.prevent.stop="" ref='userContain' v-show="visble">
+        <div :id="id" @contextmenu.prevent.stop="" ref='userContain' v-show="visble">
             <slot></slot>
         </div>
     </transition>
@@ -26,6 +26,10 @@
             visble:{
                 type:Boolean,
                 default:false
+            },
+            id:{
+                type:String,
+                default:'_menu_warp'
             }
         },
         watch: {
@@ -40,7 +44,7 @@
         },
         methods:{
             computedPosition(pos){
-                let doc = document.getElementById('menu_wrapper'),
+                let doc = document.getElementById(this.id),
                     h = parseInt(window.getComputedStyle(doc).height),
                     w = parseInt(window.getComputedStyle(doc).width),
                     // ch = window.screen.availHeight,
@@ -61,19 +65,18 @@
                 this.firstInit = [parseInt(doc.style.top),parseInt(doc.style.left),dzoom]
             },
             comPagePos(){
-                let doc = document.getElementById('menu_wrapper'),
+                let doc = document.getElementById(this.id),
                     dzoom = this.detectZoom()/100
                     doc.style.top = this.firstInit[0]/dzoom*this.firstInit[2] +'px'
                     doc.style.left = this.firstInit[1]/dzoom*this.firstInit[2] +'px'
                 this.$nextTick(()=>{
-                    let docs = document.getElementById('menu_wrapper'),
+                    let docs = document.getElementById(this.id),
                         h = parseInt(window.getComputedStyle(docs).height), 
                         w = parseInt(window.getComputedStyle(docs).width),
                         dh = document.documentElement.clientHeight,
                         dw = document.documentElement.clientWidth;
                     if((parseInt(docs.style.left)+w) > dw){
                         docs.style.left = (parseInt(docs.style.left)-w)+'px';
-                        console.log('docs.style.left')
                     }
                     if((parseInt(docs.style.top)+h) > dh){
                         docs.style.top = (parseInt(docs.style.top)-h)+'px';
@@ -117,6 +120,13 @@
             }
         },
         mounted(){
+            let doc = document.getElementById(this.id);
+            doc.style.display = 'inline'
+            doc.style.position = 'fixed'
+            doc.style.zIndex = 500
+            if(!this.visble){
+                doc.style.display = 'none'
+            }
             document.addEventListener('click',this.docClick,true)
             document.addEventListener('contextmenu',this.docClick,true)
             window.addEventListener("resize",this.windowResizeScroll,true)
@@ -132,10 +142,10 @@
 </script>
 
 <style scoped>
-    #menu_wrapper{
+    /* #menu_wrapper{
         display: inline;
         position: fixed;
-    }
+    } */
     .fade-enter-active, .fade-leave-active {
         transition:opacity .6s ease-out;
     }
