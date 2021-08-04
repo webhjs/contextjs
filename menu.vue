@@ -65,6 +65,7 @@
                 this.firstInit = [parseInt(doc.style.top),parseInt(doc.style.left),dzoom]
             },
             comPagePos(){
+                if (this.firstInit.lenght < 3) return
                 let doc = document.getElementById(this.id),
                     dzoom = this.detectZoom()/100
                     doc.style.top = this.firstInit[0]/dzoom*this.firstInit[2] +'px'
